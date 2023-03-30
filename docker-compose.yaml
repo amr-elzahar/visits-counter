@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 3679:3679
+    volumes:
+      - ./redis-data:/data
+    networks:
+      - visits-counter
+  server:
+    build: .
+    container_name: server-api
+    ports:
+      - 3000:3000
+    networks:
+      - visits-counter
+    depends_on:
+      - redis
+networks:
+  visits-counter:
