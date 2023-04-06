@@ -6,7 +6,7 @@ services:
     ports:
       - 3679:3679
     volumes:
-      - ./redis-data:/data
+      - ./redis-data:/data # You could create a named volume here instead but don't forget to include it below in the volumes section
     networks:
       - visits-counter
   server:
@@ -14,9 +14,13 @@ services:
     container_name: server-api
     ports:
       - 3000:3000
+    environment:
+      - REDIS_HOST=redis
     networks:
       - visits-counter
     depends_on:
       - redis
 networks:
   visits-counter:
+# volumes: In case of named volume
+# redis-data:

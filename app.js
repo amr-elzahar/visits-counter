@@ -4,7 +4,7 @@ const redis = require("redis");
 const app = express();
 
 const redisClient = redis.createClient({
-  url: "redis://redis:6379",
+  url: `redis://${process.env.REDIS_HOST}:6379`,
 });
 
 redisClient.on("error", () => {
